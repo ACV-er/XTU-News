@@ -1,0 +1,23 @@
+@import "./variable.scss";
+
+// 不换行
+@mixin no-wrap($line) {
+    @if $line==1 {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    @else {
+        white-space: pre-wrap;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: $line;
+        -webkit-box-orient: vertical;
+    }
+}
+
+// 控制宽度
+@mixin limit-width() {
+    width: $content-width;
+    margin: 0 auto;
+}
