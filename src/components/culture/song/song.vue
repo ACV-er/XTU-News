@@ -3,7 +3,7 @@
     <template slot="content">
       <div class="detail-part center">
         <p class="bold">湘潭大学校歌</p>
-        <audio src="@/assets/media/school_music.mp3" controls="controls" width="700"></audio>
+        <audio src="@/assets/media/school_music.mp3" controls="controls" class="song-audio"></audio>
       </div>
 
       <div class="detail-part center">
@@ -30,3 +30,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.song-audio {
+  margin-top: 20px;
+  width: 80%;
+}
+</style>

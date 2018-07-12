@@ -6,7 +6,7 @@
         <i class="iconfont icon-icongengduo"></i>
       </a>
     </p>
-    <ul v-if="listData" class="image-info-list">
+    <ul v-if="listData" class="image-info-list" v-loading="loading" element-loading-background="rgba(247, 248, 248, 0.9)">
       <li class="item-content" v-for="item in listData" :key="item.title">
         <a class="item-title" :href="item.linkUrl" :title="item.title">{{ item.title }}</a>
         <div class="item-info">
@@ -68,8 +68,14 @@ export default {
       type: Number,
       default: 1
     },
-    listData: Array,
-    default: null
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    listData: {
+      type: Array,
+      default: null
+    }
   },
   data() {
     return {
@@ -111,6 +117,7 @@ export default {
     padding: 0;
     list-style: none;
     margin: 0;
+    min-height: 150px;
 
     .item-content {
       border-bottom: 2px solid #cfcfcf;
@@ -121,6 +128,7 @@ export default {
         color: $text-color;
         text-decoration: none;
         transition: color 0.3s;
+        font-weight: bold;
 
         &:hover {
           color: $color-red;

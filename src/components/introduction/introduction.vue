@@ -1,6 +1,6 @@
 <template>
   <div class="introduction-content">
-    <side-nav class="side-nav" title="部门概况" :menuList="introductionMenu" />
+    <side-nav class="side-nav" title="部门概况" :menuList="introductionMenu" v-pin/>
     <div class="introduction-detail">
       <detail-content v-for="item in introductionMenu" :key="item.title" :title="item.title" :id="item.anchor">
         <div v-if="item.moreLink" slot="titleRight" class="more-btn">
@@ -56,11 +56,11 @@ export default {
   justify-content: space-between;
   align-items: flex-start;
 
-  .side-nav {
-  }
+  // .side-nav {}
 
   .introduction-detail {
-    flex: 0.92;
+    // flex: 0.92;
+    width: 72%;
 
     .more-btn {
       a {

@@ -1,6 +1,6 @@
 <template>
   <div class="culture-content">
-    <side-nav class="side-nav" title="文化标识" :menuList="cultureMenu"/>
+    <side-nav class="side-nav" title="文化标识" :menuList="cultureMenu" v-pin/>
     <div class="culture-detail">
       <router-view></router-view>
     </div>
@@ -17,6 +17,11 @@ export default {
       cultureMenu
     }
   },
+  beforeRouteUpdate: (to, from, next) => {
+    console.log(1)
+    window.scrollTo(0, 0)
+    next()
+  },
   components: {
     SideNav
   }
@@ -31,12 +36,11 @@ export default {
   justify-content: space-between;
   align-items: flex-start;
 
-  .side-nav {
-
-  }
+  // .side-nav {}
 
   .culture-detail {
-    flex: .92;
+    width: 72%;
+    // flex: .92;
   }
 }
 </style>

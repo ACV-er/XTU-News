@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { scroller } from 'vue-scrollto/src/scrollTo'
+
 export default {
   created() {},
   data() {
@@ -39,7 +41,7 @@ export default {
   },
   methods: {
     backToTop() {
-      window.scrollTo(0, 0)
+      scroller()({ offset: 0, duration: 300 })
     }
   }
 }

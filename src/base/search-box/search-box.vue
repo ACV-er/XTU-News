@@ -27,6 +27,17 @@ export default {}
     border-bottom-left-radius: 4px;
     padding: 0 0.5em;
     flex: 1;
+    transition: all 0.5s;
+    border-top: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    box-sizing: border-box;
+
+    &:focus {
+      border-top: 2px solid #ea9f53;
+      border-left: 2px solid #ea9f53;
+      border-bottom: 2px solid #ea9f53;
+    }
   }
 
   .search-btn {
@@ -52,8 +63,7 @@ export default {}
       background: #ea9f53;
     }
 
-    &:active {
-    }
+    // &:active {}
   }
 
   .search-input:focus,
