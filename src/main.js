@@ -6,7 +6,7 @@ import './element-variables.scss'
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { Pagination, Loading } from 'element-ui'
+import { Pagination, Loading, Card, Form, FormItem, Input, Button, Upload } from 'element-ui'
 import Pin from 'vue-pin'
 import VueScrollTo from 'vue-scrollto'
 
@@ -14,6 +14,12 @@ Vue.config.productionTip = false
 
 Vue.use(Pagination)
 Vue.use(Loading)
+Vue.use(Card)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Input)
+Vue.use(Button)
+Vue.use(Upload)
 Vue.use(Pin)
 Vue.use(VueScrollTo)
 

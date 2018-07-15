@@ -26,6 +26,7 @@
       </li>
     </ul>
     <el-pagination
+      v-if="pageControl"
       class="page-control"
       @current-change="changePage"
       :current-page.sync="currentPage"
@@ -75,6 +76,10 @@ export default {
     listData: {
       type: Array,
       default: null
+    },
+    pageControl: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

@@ -22,11 +22,12 @@ export const navList = [
   },
   {
     title: '视频新闻',
-    url: '#'
+    url: '/video'
   },
   {
     title: '湘大校报',
-    url: '#'
+    isOutLink: true,
+    url: 'http://xtu.cuepa.cn/'
   },
   {
     title: '湘大印迹',
@@ -37,8 +38,8 @@ export const navList = [
     url: '/culture'
   },
   {
-    title: '联系我们',
-    url: '#'
+    title: '在线投稿',
+    url: '/contribute'
   }
 ]
 

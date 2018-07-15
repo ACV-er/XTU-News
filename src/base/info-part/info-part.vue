@@ -15,7 +15,7 @@
         <p :title="figureInfo.desc" class="figure-desc">{{ figureInfo.desc + figureInfo.desc }}</p>
       </div>
     </figure>
-    <ul v-if="listData.length" class="info-list" :class="{ 'no-list-style': !needListDots }">
+    <ul v-if="listData" class="info-list" :class="{ 'no-list-style': !needListDots }" v-loading="loading"  element-loading-background="rgba(247, 248, 248, 0.9)">
       <li class="list-item" v-for="item in listData" :key="item.title">
         <div class="item-wrapper">
           <a :title="item.title" :href="item.linkUrl">{{ item.title }}</a>
@@ -66,9 +66,7 @@ export default {
     },
     listData: {
       type: Array,
-      default: function() {
-        return []
-      }
+      default: null
     },
     needListDots: {
       type: Boolean,
@@ -84,9 +82,18 @@ export default {
         return {}
       }
     },
+    loading: {
+      type: Boolean,
+      default: false
+    },
     pageControl: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      currentPage: this.currPage || 1
     }
   },
   mounted() {
@@ -103,6 +110,9 @@ export default {
       this.$refs.partTitle.style['font-weight'] = `${
         this.boldTitle ? 'bold' : 'normal'
       }`
+    },
+    changePage(val) {
+      this.$emit('pageChanged', val)
     }
   }
 }
@@ -172,6 +182,7 @@ export default {
     margin-top: 25px;
     margin-bottom: 0;
     padding-bottom: 15px;
+    min-height: 150px;
 
     &.no-list-style {
       padding-left: 15px;

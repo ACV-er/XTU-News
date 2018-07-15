@@ -1,6 +1,6 @@
 <template>
   <div class="news-content" id="news-content">
-    <image-info-part class="news-list" titleColor="#b03534" borderColor="#efc86c" title="综合要闻" :boldTitle="true" :listData="newsList" :currPage="currPage" @pageChanged="changePage" :loading="newsLoading"></image-info-part>
+    <image-info-part class="news-list" titleColor="#b03534" borderColor="#efc86c" title="综合要闻" :boldTitle="true" :listData="newsList" :currPage="currPage" pageControl @pageChanged="changePage" :loading="newsLoading"></image-info-part>
 
     <time-info-part class="recent-hot-spots" title="近期热点" :title-config="{ bold: true }" :no-more="true" :time-info-list="hotSpotsInfo">
       <i class="iconfont icon-xiaoshouqushi" slot="icon"></i>

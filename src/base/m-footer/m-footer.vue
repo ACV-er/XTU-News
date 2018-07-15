@@ -3,7 +3,7 @@
     <footer class="footer-container">
       <img src="@/assets/images/footer_slogan.png" alt="博学笃行，盛德日新">
       <p>Copyright 2001-{{ currYear }} <a href="http://218.75.242.251:8007/">湘潭大学党委宣传部</a> 地址：中国湖南湘潭. 邮编：411105</p>
-      <p>湘ICP备：05005862号 湘教QS3-200505-000059</p>
+      <p>湘ICP备：05005862 号 湘教 QS3-200505-000059</p>
     </footer>
   </div>
 </template>

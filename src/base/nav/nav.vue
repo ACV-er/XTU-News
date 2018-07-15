@@ -2,8 +2,8 @@
   <div class="nav">
     <ul class="nav-list" ref="navList">
       <li class="nav-item" v-for="(item, index) in navList" :key="item.title" @mouseover="moveTipLine(index)" @mouseout="initTipLinePos" @click="changePage(index)">
-        <!-- <a :href="item.url" :title="item.title">{{ item.title }}</a> -->
-        <router-link :to="item.url" :title="item.title">{{ item.title }}</router-link>
+        <a v-if="item.isOutLink" :href="item.url" :title="item.title">{{ item.title }}</a>
+        <router-link v-else :to="item.url" :title="item.title">{{ item.title }}</router-link>
       </li>
     </ul>
     <div class="tip-line" ref="tipLine"></div>
@@ -13,7 +13,7 @@
 <script>
 import { navList } from '@/common/lib/config'
 
-const navListIndex = ['home', 'introduction', 'news', 'media', 'fax', '', '', '', 'culture']
+const navListIndex = navList.map(item => item.url.substr(1))
 
 export default {
   data() {
@@ -27,7 +27,6 @@ export default {
       this.$refs.navList.clientWidth / navList.length + 'px'
     this.$nextTick(() => {
       this.initTipLinePos()
-
       // 设置 index
       let currPath = this.$route.path.split('/')[1]
       this.currIndex = navListIndex.indexOf(currPath)

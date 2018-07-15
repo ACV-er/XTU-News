@@ -8,6 +8,8 @@ import Culture from '@/components/culture/culture'
 import News from '@/components/news/news'
 import Media from '@/components/media/media'
 import Fax from '@/components/fax/fax'
+import Video from '@/components/video/video'
+import Contribute from '@/components/contribute/contribute'
 
 /// 二级页面
 // 文化标识
@@ -35,23 +37,43 @@ export default new Router({
     },
     {
       path: '/news',
-      component: News
-    },
-    {
-      path: '/news/:page',
-      component: News
+      component: News,
+      children: [
+        {
+          path: ':page',
+          component: News
+        }
+      ]
     },
     {
       path: '/media',
-      component: Media
-    },
-    {
-      path: '/media/:page',
-      component: Media
+      component: Media,
+      children: [
+        {
+          path: ':page',
+          component: Media
+        }
+      ]
     },
     {
       path: '/fax',
-      component: Fax
+      component: Fax,
+      children: [
+        {
+          path: ':page',
+          component: Fax
+        }
+      ]
+    },
+    {
+      path: '/video',
+      component: Video,
+      children: [
+        {
+          path: ':page',
+          component: Video
+        }
+      ]
     },
     {
       path: '/culture',
@@ -79,6 +101,10 @@ export default new Router({
           component: CultureFlag
         }
       ]
+    },
+    {
+      path: '/contribute',
+      component: Contribute
     }
   ],
   scrollBehavior(to, from) {
