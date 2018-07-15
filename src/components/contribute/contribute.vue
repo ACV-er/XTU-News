@@ -21,12 +21,17 @@
           <el-input v-model="contributeFrom.organization" placeholder="请输入所在单位"></el-input>
         </el-form-item>
 
-        <el-form-item label="新闻稿文件" prop="tel">
+        <el-form-item label="新闻稿文件" prop="upload">
           <el-upload action="/contribute" :auto-upload="false" :limit="1">
             <el-button size="small" type="primary">点击上传</el-button>
           </el-upload>
           <div class="upload-tip">新闻稿件文件类型为 Word 或 JPG 文件；若新闻稿件有多个文件（含图片），请先使用压缩软件打包成一个 ZIP 或 RAR 文件再上传</div>
         </el-form-item>
+
+        <el-form-item label="投稿备注">
+          <el-input v-model="contributeFrom.remark" type="textarea" :rows="3" placeholder="请输入投稿备注"></el-input>
+        </el-form-item>
+        <!-- 要么有投稿备注，要么有新闻稿文件 -->
 
         <el-form-item>
           <el-button type="primary" @click="submitForm">发送</el-button>
@@ -45,7 +50,8 @@ export default {
         title: '',
         author: '',
         organization: '',
-        tel: ''
+        tel: '',
+        remark: ''
       },
       contributeRules: {
         title: [
