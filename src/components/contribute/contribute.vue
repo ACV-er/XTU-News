@@ -23,7 +23,7 @@
 
         <el-form-item label="新闻稿文件" prop="upload">
           <el-upload action="/contribute" :auto-upload="false" :limit="1">
-            <el-button size="small" type="primary">点击上传</el-button>
+            <el-button size="medium" type="primary">点击上传</el-button>
           </el-upload>
           <div class="upload-tip">新闻稿件文件类型为 Word 或 JPG 文件；若新闻稿件有多个文件（含图片），请先使用压缩软件打包成一个 ZIP 或 RAR 文件再上传</div>
         </el-form-item>

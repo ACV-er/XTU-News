@@ -1,7 +1,7 @@
 <template>
   <div class="video-content">
     <div class="video-list-wrapper" id="video-list-wrapper">
-      <div class="video-list" v-loading="videoLoading">
+      <div class="video-list" v-loading="videoLoading" element-loading-background="rgba(247, 248, 248, 0.9)">
         <video-item v-for="(item, index) in videoInfoList" :key="item.title" :video-info="item" :width="index ? 300 : 650" :title-size="index ? 14 : 24" :divider="!index"></video-item>
       </div>
 

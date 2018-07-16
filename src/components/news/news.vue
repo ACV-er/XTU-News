@@ -1,18 +1,14 @@
 <template>
   <div class="news-content" id="news-content">
     <image-info-part class="news-list" titleColor="#b03534" borderColor="#efc86c" title="综合要闻" :boldTitle="true" :listData="newsList" :currPage="currPage" pageControl @pageChanged="changePage" :loading="newsLoading"></image-info-part>
-
-    <time-info-part class="recent-hot-spots" title="近期热点" :title-config="{ bold: true }" :no-more="true" :time-info-list="hotSpotsInfo">
-      <i class="iconfont icon-xiaoshouqushi" slot="icon"></i>
-    </time-info-part>
+    <HotSpots></HotSpots>
   </div>
 </template>
 
 <script>
 // import InfoPart from '@/base/info-part/info-part'
 import ImageInfoPart from '@/base/image-info-part/image-info-part'
-import TimeInfoPart from '@/base/time-info-part/time-info-part'
-import NewsInfo from './news-mock-info'
+import HotSpots from '@/base/hot-spots/hot-spots'
 import { scroller } from 'vue-scrollto/src/scrollTo'
 import { getNewsByPage } from '@/api'
 
@@ -24,12 +20,10 @@ export default {
     return {
       currPage: parseInt(this.$route.params.page) || 1,
       newsList: [],
-      hotSpotsInfo: [],
       newsLoading: false
     }
   },
   mounted() {
-    this._getHotSpotsInfo()
     this._getNewsList()
   },
   methods: {
@@ -37,9 +31,6 @@ export default {
       this.newsLoading = true
       this.newsList = await getNewsByPage(this.currPage)
       this.newsLoading = false
-    },
-    _getHotSpotsInfo() {
-      this.hotSpotsInfo = NewsInfo
     },
     changePage(page) {
       this.$router.push(`/news/${page}`)
@@ -54,7 +45,7 @@ export default {
   },
   components: {
     ImageInfoPart,
-    TimeInfoPart
+    HotSpots
   }
 }
 </script>
@@ -68,11 +59,6 @@ export default {
 
   .news-list {
     width: 650px;
-  }
-
-  .recent-hot-spots {
-    flex: 1;
-    padding: 0 35px;
   }
 }
 </style>
