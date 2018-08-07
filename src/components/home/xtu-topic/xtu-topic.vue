@@ -17,7 +17,11 @@
         </transition>
       </div>
 
-      <info-part class="lastest-topic" title="最新专题" border-color="transparent" more-url="https://baidu.com/" title-color="#fff">
+      <info-part class="lastest-topic"
+                 title="最新专题"
+                 border-color="transparent"
+                 more-url="https://baidu.com/"
+                 title-color="#fff">
         <div slot="custom" class="topic-list">
           <a class="topic-item" :href="item.linkUrl" v-for="item in topicInfo" :key="item.title" :title="item.title">
             <img :src="item.picUrl" :alt="item.title">

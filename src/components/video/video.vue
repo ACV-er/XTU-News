@@ -9,24 +9,23 @@
         class="page-control"
         @current-change="changePage"
         :current-page.sync="currPage"
-        :page-size="100"
+        :page-size="limit"
         layout="prev, pager, next, jumper"
         background
-        :total="1000">
+        :total="total">
       </el-pagination>
     </div>
+    <hot-spots/>
   </div>
 </template>
 
 <script>
 import VideoItem from './video-item'
-import { getVideoByPage } from '@/api'
+import HotSpots from '@/base/hot-spots/hot-spots'
+import { getVideoByPage, handleError } from '@/api'
 import { scroller } from 'vue-scrollto/src/scrollTo'
 
 export default {
-  components: {
-    VideoItem
-  },
   mounted() {
     this._getVideoList()
   },
@@ -34,7 +33,9 @@ export default {
     return {
       currPage: parseInt(this.$route.params.page) || 1,
       videoInfoList: [],
-      videoLoading: false
+      videoLoading: false,
+      total: 0,
+      limit: 10
     }
   },
   methods: {
@@ -44,7 +45,24 @@ export default {
     },
     async _getVideoList() {
       this.videoLoading = true
-      this.videoInfoList = await getVideoByPage(this.currPage)
+      let data = (await getVideoByPage(this.currPage)).data
+      if (data.code === 0) {
+        this.total = data.data ? +data.data.count : 0
+        this.videoInfoList = data.data.list ? data.data.list.map(item => {
+          return {
+            title: item.title,
+            picUrl: item.pic,
+            linkUrl: `/video/view/${item.news_id}`,
+            date: item.mtime
+          }
+          // picUrl: 'http://www.xtu.edu.cn/d/file/xdxw/xnxw/2018-06-26/7bc630f2961187246ec56be26d4b0669.jpg',
+          //     title: '「第 ' + page + ' 页」58级校友捐赠书法作品献礼60周年校庆' + i,
+          //     linkUrl: 'http://news.xtu.edu.cn/html/zonghexw/show_10883.html',
+          //     date: 1531652795909
+        }) : null
+      } else {
+        handleError(data)
+      }
       this.videoLoading = false
     }
   },
@@ -53,6 +71,10 @@ export default {
     next()
     await this._getVideoList()
     scroller()('#video-list-wrapper')
+  },
+  components: {
+    VideoItem,
+    HotSpots
   }
 }
 </script>

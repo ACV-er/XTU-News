@@ -4,14 +4,24 @@ import Router from 'vue-router'
 /// 一级页面
 import Home from '@/components/home/home'
 import Introduction from '@/components/introduction/introduction'
-import Culture from '@/components/culture/culture'
 import News from '@/components/news/news'
 import Media from '@/components/media/media'
 import Fax from '@/components/fax/fax'
 import Video from '@/components/video/video'
+import Mark from '@/components/mark/mark'
+import Culture from '@/components/culture/culture'
 import Contribute from '@/components/contribute/contribute'
 
 /// 二级页面
+// 新闻
+import NewsContent from '@/components/news/NewsContent/news-content'
+import MediaContent from '@/components/media/MediaContent/media-content'
+import FaxContent from '@/components/fax/FaxContent/fax-content'
+
+// 湘大印记
+import MarkHistory from '@/components/mark/history/history'
+import MarkCharacter from '@/components/mark/character/character'
+
 // 文化标识
 import CultureName from '@/components/culture/name/name'
 import CultureBadge from '@/components/culture/badge/badge'
@@ -46,6 +56,10 @@ export default new Router({
       ]
     },
     {
+      path: '/news/view/:newsId',
+      component: NewsContent
+    },
+    {
       path: '/media',
       component: Media,
       children: [
@@ -54,6 +68,10 @@ export default new Router({
           component: Media
         }
       ]
+    },
+    {
+      path: '/media/view/:newsId',
+      component: MediaContent
     },
     {
       path: '/fax',
@@ -66,12 +84,31 @@ export default new Router({
       ]
     },
     {
+      path: '/fax/view/:newsId',
+      component: FaxContent
+    },
+    {
       path: '/video',
       component: Video,
       children: [
         {
           path: ':page',
           component: Video
+        }
+      ]
+    },
+    {
+      path: '/mark',
+      component: Mark,
+      redirect: '/mark/history',
+      children: [
+        {
+          path: 'history',
+          component: MarkHistory
+        },
+        {
+          path: 'character',
+          component: MarkCharacter
         }
       ]
     },

@@ -11,14 +11,16 @@
         <i class="iconfont icon-icongengduo"></i>
       </a>
     </p>
-    <ul v-if="timeInfoList.length" class="time-info-list">
-      <li class="time-info-item" v-for="item in timeInfoList" :key="item.title">
-        <p class="item-date">
-          <i class="iconfont icon-riliriqi"></i>{{ item.date }}<i class="iconfont icon-tubiao_liulan"></i>{{ item.view }}
-        </p>
-        <a :title="item.title" :href="item.linkUrl">{{ item.title }}</a>
-      </li>
-    </ul>
+    <div class="time-info-list-wrapper" v-loading="loading" element-loading-background="rgba(247, 248, 248, 0.9)">
+      <ul v-if="timeInfoList" class="time-info-list">
+        <li class="time-info-item" v-for="item in timeInfoList" :key="item.news_id">
+          <p class="item-date">
+            <i class="iconfont icon-riliriqi"></i>{{ item.mtime }}<i class="iconfont icon-tubiao_liulan"></i>{{ item.view_count }}
+          </p>
+          <router-link :title="item.title" :to="item.news_id">{{ item.title }}</router-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -51,6 +53,10 @@ export default {
       default: function() {
         return []
       }
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   mounted() {
@@ -96,44 +102,48 @@ export default {
     }
   }
 
-  .time-info-list {
-    padding: 0;
-    list-style: none;
+  .time-info-list-wrapper {
+    min-height: 150px;
 
-    .time-info-item {
-      border-bottom: 1px solid #777;
-      padding-bottom: 15px;
+    .time-info-list {
+      padding: 0;
+      list-style: none;
 
-      &:last-child {
-        border: none;
-      }
+      .time-info-item {
+        border-bottom: 1px solid #777;
+        padding-bottom: 15px;
 
-      .item-date {
-        font-size: $font-size-desc;
-        color: $text-color-l;
+        &:last-child {
+          border: none;
+        }
 
-        i {
-          margin-right: 5px;
-          font-size: 16px;
-          color: #fbc566;
+        .item-date {
+          font-size: $font-size-desc;
+          color: $text-color-l;
 
-          &.icon-tubiao_liulan {
-            margin-left: 20px;
+          i {
+            margin-right: 5px;
+            font-size: 16px;
+            color: #fbc566;
+
+            &.icon-tubiao_liulan {
+              margin-left: 20px;
+            }
           }
         }
-      }
 
-      a {
-        color: $text-color-l;
-        text-decoration: none;
-        height: 3em;
-        line-height: 1.5em;
-        font-size: $font-size-medium;
-        transition: all 0.25s;
-        @include no-wrap(2);
+        a {
+          color: $text-color-l;
+          text-decoration: none;
+          height: 3em;
+          line-height: 1.5em;
+          font-size: $font-size-medium;
+          transition: all 0.25s;
+          @include no-wrap(2);
 
-        &:hover {
-          color: $color-red;
+          &:hover {
+            color: $color-red;
+          }
         }
       }
     }

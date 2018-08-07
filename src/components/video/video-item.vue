@@ -1,12 +1,14 @@
 <template>
   <figure class="video-item" v-if="videoInfo" ref="videoItem">
-    <a :href="videoInfo.linkUrl" class="video-pic">
+    <router-link :to="videoInfo.linkUrl" class="video-pic">
       <img :title="videoInfo.title" :src="videoInfo.picUrl" :alt="videoInfo.title">
-      <i class="play-btn iconfont icon-bofang" ref="playBtn"></i>
-    </a>
+      <i class="play-btn iconfont icon-bofang" :style="'font-size: ' + this.width * 0.13 + 'px'"></i>
+    </router-link>
     <div class="video-info">
-      <a :href="videoInfo.linkUrl" :title="videoInfo.title" class="video-title" ref="videoTitle">{{ videoInfo.title }}</a>
-      <p class="video-time"><i class="iconfont icon-shijian"></i>{{ (new Date(videoInfo.date)).toLocaleDateString() }}</p>
+      <router-link :to="videoInfo.linkUrl" :title="videoInfo.title" class="video-title" :style="'font-size: ' + titleSize + 'px'">
+        {{ videoInfo.title }}
+      </router-link>
+      <p class="video-time"><i class="iconfont icon-shijian"></i>{{ videoInfo.date }}</p>
     </div>
     <div v-if="divider" class="divider"></div>
   </figure>
@@ -41,8 +43,6 @@ export default {
 
       this.$refs.videoItem.style.width = width
       this.$refs.videoItem.style.heigth = heigth
-      this.$refs.videoTitle.style['font-size'] = this.titleSize + 'px'
-      this.$refs.playBtn.style['font-size'] = this.width * 0.13 + 'px'
     }
   }
 }
@@ -75,7 +75,6 @@ export default {
     }
 
     .play-btn {
-      color: gray;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -85,7 +84,7 @@ export default {
     }
 
     &:hover .play-btn {
-      color: rgba(#fff, 0.6);
+      color: rgba(#fff, 0.8);
     }
   }
 

@@ -6,34 +6,37 @@
         <i class="iconfont icon-icongengduo"></i>
       </a>
     </p>
-    <ul v-if="listData" class="image-info-list" v-loading="loading" element-loading-background="rgba(247, 248, 248, 0.9)">
-      <li class="item-content" v-for="item in listData" :key="item.title">
-        <a class="item-title" :href="item.linkUrl" :title="item.title">{{ item.title }}</a>
-        <div class="item-info">
-          <a :href="item.linkUrl" :title="item.title">
-            <img class="item-image" :src="item.imageUrl" :alt="item.title" :title="item.title">
-          </a>
-          <div class="item-summary">
-            <p :title="item.intro">{{ item.intro }}</p>
-            <p class="item-detail">
+    <div class="image-info-list-wrapper" v-loading="loading" element-loading-background="rgba(247, 248, 248, 0.9)">
+      <div class="no-data-tip" v-if="listData === null || listData.length === 0">暂无数据</div>
+      <ul v-if="listData" class="image-info-list">
+        <li class="item-content" v-for="item in listData" :key="item.id || item.title">
+          <router-link class="item-title" :title="item.title" :to="item.linkUrl">{{ item.title }}</router-link>
+          <div class="item-info">
+            <router-link v-if="item.imageUrl" :title="item.title" :to="item.linkUrl">
+              <img class="item-image" :src="item.imageUrl" :alt="item.title" :title="item.title">
+            </router-link>
+            <div class="item-summary">
+              <p :title="item.intro">{{ item.intro }}</p>
+              <p class="item-detail">
               <span>
                 <i class="iconfont icon-riliriqi"></i>{{ item.date || '-' }}</span>
-              <span>
+                <span>
                 <i class="iconfont icon-tubiao_liulan"></i>{{ item.view || '-' }}</span>
-            </p>
+              </p>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
     <el-pagination
       v-if="pageControl"
       class="page-control"
       @current-change="changePage"
       :current-page.sync="currentPage"
-      :page-size="100"
+      :page-size="limit"
       layout="prev, pager, next, jumper"
       background
-      :total="1000">
+      :total="total">
     </el-pagination>
   </div>
 </template>
@@ -80,6 +83,14 @@ export default {
     pageControl: {
       type: Boolean,
       default: false
+    },
+    total: {
+      type: Number,
+      default: 0
+    },
+    limit: {
+      type: Number,
+      default: 10
     }
   },
   data() {
@@ -118,66 +129,77 @@ export default {
     color: $text-color;
   }
 
-  .image-info-list {
-    padding: 0;
-    list-style: none;
-    margin: 0;
+  .image-info-list-wrapper {
     min-height: 150px;
 
-    .item-content {
-      border-bottom: 2px solid #cfcfcf;
-      .item-title {
-        display: block;
-        font-size: $font-size-title-large;
-        line-height: 3.5em;
-        color: $text-color;
-        text-decoration: none;
-        transition: color 0.3s;
-        font-weight: bold;
+    .no-data-tip {
+      width: 100%;
+      line-height: 150px;
+      text-align: center;
+      color: #666;
+    }
 
-        &:hover {
-          color: $color-red;
+    .image-info-list {
+      padding: 0;
+      list-style: none;
+      margin: 0;
+
+      .item-content {
+        padding-right: 20px;
+        border-bottom: 2px solid #cfcfcf;
+        .item-title {
+          display: block;
+          font-size: $font-size-title-large;
+          line-height: 3.5em;
+          color: $text-color;
+          text-decoration: none;
+          transition: color 0.3s;
+          font-weight: bold;
+
+          &:hover {
+            color: $color-red;
+          }
         }
-      }
 
-      .item-info {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 30px;
-
-        .item-image {
-          width: 250px;
-        }
-
-        .item-summary {
-          flex: 1;
-          margin: 0 30px;
-          align-self: stretch;
+        .item-info {
           display: flex;
-          flex-direction: column;
+          align-items: center;
           justify-content: space-between;
+          margin-bottom: 30px;
 
-          p {
-            margin: 10px 0;
-            line-height: 1.4em;
-            font-size: $font-size-medium;
-            @include no-wrap(6);
+          .item-image {
+            width: 250px;
+            margin-right: 30px;
           }
 
-          .item-detail {
-            margin: 0;
+          .item-summary {
+            flex: 1;
+            align-self: stretch;
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
-            font-size: $font-size-desc;
 
-            i {
-              margin-right: 5px;
-              font-size: 16px;
-              color: #fbc566;
+            p {
+              margin: 10px 0;
+              line-height: 1.4em;
+              font-size: $font-size-medium;
+              @include no-wrap(6);
+            }
 
-              &.icon-tubiao_liulan {
-                margin-left: 20px;
+            .item-detail {
+              margin: 0;
+              display: flex;
+              justify-content: space-between;
+              font-size: $font-size-desc;
+
+              i {
+                margin-right: 5px;
+                font-size: 16px;
+                color: #fbc566;
+
+                &.icon-tubiao_liulan {
+                  margin-left: 20px;
+                }
               }
             }
           }

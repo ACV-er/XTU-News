@@ -48,6 +48,9 @@ export default {
   watch: {
     currIndex(newValue) {
       this.initTipLinePos()
+    },
+    $route(newValue) {
+      this.moveTipLine(navListIndex.indexOf(newValue.path.split('/')[1]))
     }
   }
 }

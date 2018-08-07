@@ -1,24 +1,24 @@
 <template>
-  <div class="slider-container">
+  <div class="slider-container" v-if="infoData">
     <div class="slider" ref="slider">
       <div class="slider-group" ref="sliderGroup">
-        <div class="slider-item" v-for="item in sliderInfo" :key="item.linkUrl">
-          <a :href="item.linkUrl">
-            <img :src="item.picUrl">
-          </a>
+        <div class="slider-item" v-for="item in infoData" :key="item.news_id">
+          <router-link :to="`news/view/${item.news_id}`">
+            <img :src="item.pic">
+          </router-link>
 
           <div class="slider-content">
-            <a :href="item.linkUrl" :title="item.title" class="slider-title">{{ item.title }}</a>
-            <p :title="item.desc" class="slider-desc">{{ item.desc }}</p>
+            <router-link :to="`news/view/${item.news_id}`" :title="item.title" class="slider-title">{{ item.title }}</router-link>
+            <p :title="item.description" class="slider-desc">{{ item.description }}</p>
           </div>
         </div>
       </div>
     </div>
 
     <ul class="date-list" @click.stop>
-      <li class="date-item" v-for="(item, index) in sliderInfo" :key="item.url" :class="{ 'active': currIndex === index }" @click="moveToPage(index)">
-        <p class="date-day">{{ item.date.day }}</p>
-        <span class="date-time">{{ item.date.time }}</span>
+      <li class="date-item" v-for="(item, index) in infoData" :key="item.news_id" :class="{ 'active': currIndex === index }" @click="moveToPage(index)">
+        <p class="date-day">{{ item.mtime.split(' ')[0].split('-')[2] }}</p>
+        <span class="date-time">{{ item.mtime.split(' ')[0].split('-').slice(0, 2).join('.') }}</span>
       </li>
 
       <div class="op-btn">
@@ -35,21 +35,33 @@
 
 <script>
 import BScroll from 'better-scroll'
-import info from './slider-mock-info'
+// import info from './slider-mock-info'
 
 const SLIDER_WIDTH = 650
 
 export default {
+  props: {
+    infoData: {
+      default: null
+    }
+  },
   created() {
-    this._getInfo()
+    // this._getInfo()
     this.interval = 4000
   },
-  mounted() {
-    this.$nextTick(() => {
-      this._initSlider()
-      this._play()
-    })
+  watch: {
+    infoData(newValue) {
+      console.log(newValue)
+      if (newValue) {
+        this.$nextTick(() => {
+          this._initSlider()
+          this._play()
+        })
+      }
+    }
   },
+  // mounted() {
+  // },
   data() {
     return {
       sliderInfo: null,
@@ -80,9 +92,9 @@ export default {
       if (this.slider.isInTransition || this.slider.isAnimating) return
       this.slider.prev()
     },
-    _getInfo() {
-      this.sliderInfo = info
-    },
+    // _getInfo() {
+    //   this.sliderInfo = info
+    // },
     _initSlider() {
       this.slider = new BScroll(this.$refs.slider, {
         scrollX: true,
@@ -107,7 +119,7 @@ export default {
       })
 
       this.$refs.sliderGroup.style.width =
-        (this.sliderInfo.length + 2) * SLIDER_WIDTH + 'px'
+        (this.infoData.length + 2) * SLIDER_WIDTH + 'px'
     },
     _play() {
       // 自动滚动
@@ -158,6 +170,8 @@ export default {
           display: block;
           width: 100%;
           user-select: none;
+          height: 400px;
+          background-color: #444444;
         }
 
         .slider-content {

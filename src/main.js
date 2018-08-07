@@ -6,7 +6,7 @@ import './element-variables.scss'
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { Pagination, Loading, Card, Form, FormItem, Input, Button, Upload } from 'element-ui'
+import { Pagination, Loading, Card, Form, FormItem, Input, Button, Upload, Breadcrumb, BreadcrumbItem } from 'element-ui'
 import Pin from 'vue-pin'
 import VueScrollTo from 'vue-scrollto'
 
@@ -20,6 +20,8 @@ Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Button)
 Vue.use(Upload)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
 Vue.use(Pin)
 Vue.use(VueScrollTo)
 

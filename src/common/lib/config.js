@@ -31,7 +31,7 @@ export const navList = [
   },
   {
     title: '湘大印迹',
-    url: '#'
+    url: '/mark'
   },
   {
     title: '文化标识',
@@ -210,5 +210,17 @@ export const cultureMenu = [
   {
     title: '校旗',
     link: '/culture/flag'
+  }
+]
+
+// 湘大印记目录
+export const markMenu = [
+  {
+    title: '湘大史话',
+    link: '/mark/history'
+  },
+  {
+    title: '湘大人物',
+    link: '/mark/character'
   }
 ]

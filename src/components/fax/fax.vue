@@ -1,18 +1,15 @@
 <template>
   <div class="fax-content" id="fax-content">
-    <info-part class="fax-list" titleColor="#b03534" borderColor="#efc86c" title="院系传真" :boldTitle="true" :needListDots="true" :noMore="true" :listData="faxList" pageControl @pageChanged="changePage" :loading="faxLoading"></info-part>
-
-    <time-info-part class="recent-hot-spots" title="近期热点" :title-config="{ bold: true }" :no-more="true" :time-info-list="hotSpotsInfo">
-      <i class="iconfont icon-xiaoshouqushi" slot="icon"></i>
-    </time-info-part>
+    <info-part class="fax-list" titleColor="#b03534" borderColor="#efc86c" title="院系传真" :boldTitle="true" :needListDots="true" :noMore="true" :listData="faxList" pageControl :total="total" :limit="limit" @pageChanged="changePage" :loading="faxLoading"></info-part>
+    <hot-spots/>
   </div>
 </template>
 
 <script>
 import InfoPart from '@/base/info-part/info-part'
 import TimeInfoPart from '@/base/time-info-part/time-info-part'
-import FaxInfo from './fax-mock-info'
-import { getFaxByPage } from '@/api'
+import HotSpots from '@/base/hot-spots/hot-spots'
+import { getFaxByPage, handleError } from '@/api'
 import { scroller } from 'vue-scrollto/src/scrollTo'
 
 // const PERPAGE_NUMBER = 25 // 每页显示的内容个数
@@ -22,22 +19,31 @@ export default {
   data() {
     return {
       currPage: parseInt(this.$route.params.page) || 1,
-      faxList: [],
-      hotSpotsInfo: [],
-      faxLoading: false
+      faxList: null,
+      faxLoading: false,
+      total: 0,
+      limit: 10
     }
   },
   mounted() {
-    this._getHotSpotsInfo()
     this._getFaxList()
   },
   methods: {
-    _getHotSpotsInfo() {
-      this.hotSpotsInfo = FaxInfo
-    },
     async _getFaxList() {
       this.faxLoading = true
-      this.faxList = await getFaxByPage(this.currPage)
+      let data = (await getFaxByPage(this.currPage)).data
+      if (data.code === 0) {
+        this.total = data.data ? +data.data.count : 0
+        this.faxList = data.data.list ? data.data.list.map(item => {
+          return {
+            title: item.title,
+            linkUrl: `/fax/view/${item.news_id}`,
+            markText: item.mtime.split(' ')[0].substr(5)
+          }
+        }) : null
+      } else {
+        handleError(data)
+      }
       this.faxLoading = false
     },
     changePage(page) {
@@ -53,7 +59,8 @@ export default {
   },
   components: {
     InfoPart,
-    TimeInfoPart
+    TimeInfoPart,
+    HotSpots
   }
 }
 </script>
@@ -67,11 +74,6 @@ export default {
 
   .fax-list {
     width: 650px;
-  }
-
-  .recent-hot-spots {
-    flex: 1;
-    padding: 0 35px;
   }
 }
 </style>
