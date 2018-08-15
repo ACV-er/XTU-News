@@ -14,13 +14,11 @@
         </div>
       </div>
     </div>
-
     <ul class="date-list" @click.stop>
       <li class="date-item" v-for="(item, index) in infoData" :key="item.origin_news_id || item.news_id" :class="{ 'active': currIndex === index }" @click="moveToPage(index)">
         <p class="date-day">{{ item.mtime.split(' ')[0].split('-')[2] }}</p>
         <span class="date-time">{{ item.mtime.split(' ')[0].split('-').slice(0, 2).join('.') }}</span>
       </li>
-
       <div class="op-btn">
         <div @click="moveToPrev" class="prev-btn">
           <i class="iconfont icon-arrow-left"></i>
