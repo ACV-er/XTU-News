@@ -11,6 +11,7 @@ import ImageInfoPart from '@/base/image-info-part/image-info-part'
 import HotSpots from '@/base/hot-spots/hot-spots'
 import { scroller } from 'vue-scrollto/src/scrollTo'
 import { getNewsByPage, handleError } from '@/api'
+import { get } from 'lodash'
 
 // const PERPAGE_NUMBER = 25 // 每页显示的内容个数
 // const DISPLAY_PAGE_NUMBER = 9 // 最长显示页码的个数
@@ -33,7 +34,7 @@ export default {
       this.newsLoading = true
       let data = (await getNewsByPage(this.currPage, this.limit)).data
       if (data.code === 0) {
-        this.total = data.data ? +data.data.count : 0
+        this.total = +get(data, 'data.count', 0)
         this.newsList = data.data.list ? data.data.list.map(item => {
           return {
             id: item.news_id,

@@ -17,6 +17,8 @@ import Contribute from '@/components/contribute/contribute'
 import NewsContent from '@/components/news/NewsContent/news-content'
 import MediaContent from '@/components/media/MediaContent/media-content'
 import FaxContent from '@/components/fax/FaxContent/fax-content'
+import MarkContent from '@/components/mark/MarkContent/mark-content'
+import VideoContent from '@/components/video/VideoContent/video-content'
 
 // 湘大印记
 import MarkHistory from '@/components/mark/history/history'
@@ -89,18 +91,16 @@ export default new Router({
     },
     {
       path: '/video',
-      component: Video,
-      children: [
-        {
-          path: ':page',
-          component: Video
-        }
-      ]
+      component: Video
+    },
+    {
+      path: '/video/view/:newsId',
+      component: VideoContent
     },
     {
       path: '/mark',
       component: Mark,
-      redirect: '/mark/history',
+      redirect: '/mark/character',
       children: [
         {
           path: 'history',
@@ -108,10 +108,24 @@ export default new Router({
         },
         {
           path: 'character',
-          component: MarkCharacter
+          component: MarkCharacter,
+          children: [
+            {
+              path: ':page',
+              component: Fax
+            }
+          ]
         }
       ]
     },
+    {
+      path: '/mark/view/:newsId',
+      component: MarkContent
+    },
+    // {
+    //   path: '/mark/:newsId',
+    //   component: Mark
+    // },
     {
       path: '/culture',
       component: Culture,

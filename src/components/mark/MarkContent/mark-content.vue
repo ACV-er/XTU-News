@@ -1,9 +1,9 @@
 <template>
-  <news-content :news-id="newsId" :secondLevel="{ url: '/news', title: '综合要闻'}" />
+  <mark-content :news-id="newsId" :secondLevel="{ url: '/mark', title: '湘大人物'}" />
 </template>
 
 <script>
-import NewsContent from '@/base/content/content'
+import MarkContent from '@/base/content/content'
 
 export default {
   data() {
@@ -12,7 +12,7 @@ export default {
     }
   },
   components: {
-    NewsContent
+    MarkContent
   }
 }
 </script>

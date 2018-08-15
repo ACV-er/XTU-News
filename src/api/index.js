@@ -32,9 +32,28 @@ export function getVideoByPage(page, limit = 10) {
   return http.get(url)
 }
 
+export function getMarkByPage(page, limit = 10) {
+  const url = `${URL_BASE}/newslist.php?letter=xiangdarenwu&page=${page}&limit=${limit}`
+  return http.get(url)
+}
+
 export function getHotSpots(limit = 5) {
   const url = `${URL_BASE}/hotlist.php?limit=${limit}`
   return http.get(url)
+}
+
+export function PostContribute(title, author, tel, belongs, mark, file) {
+  const url = 'https://xtunews.kilingzhang.com/phpcms-api/addContent.php'
+  return http.post(url, {
+    title,
+    author,
+    tel,
+    belongs,
+    mark,
+    file
+  }, {
+    headers: {'Content-Type': 'multipart/form-data'}
+  })
 }
 
 export function handleError(e) {

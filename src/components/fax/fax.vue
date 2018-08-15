@@ -11,6 +11,7 @@ import TimeInfoPart from '@/base/time-info-part/time-info-part'
 import HotSpots from '@/base/hot-spots/hot-spots'
 import { getFaxByPage, handleError } from '@/api'
 import { scroller } from 'vue-scrollto/src/scrollTo'
+import { get } from 'lodash'
 
 // const PERPAGE_NUMBER = 25 // 每页显示的内容个数
 // const DISPLAY_PAGE_NUMBER = 9 // 最长显示页码的个数
@@ -31,16 +32,10 @@ export default {
   methods: {
     async _getFaxList() {
       this.faxLoading = true
-      let data = (await getFaxByPage(this.currPage)).data
+      let data = (await getFaxByPage(this.currPage, this.limit)).data
       if (data.code === 0) {
-        this.total = data.data ? +data.data.count : 0
-        this.faxList = data.data.list ? data.data.list.map(item => {
-          return {
-            title: item.title,
-            linkUrl: `/fax/view/${item.news_id}`,
-            markText: item.mtime.split(' ')[0].substr(5)
-          }
-        }) : null
+        this.total = +get(data, 'data.count', 0)
+        this.faxList = data.data.list
       } else {
         handleError(data)
       }

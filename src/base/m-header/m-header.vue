@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="container">
-      <a href="#"><img class="xtu-logo" src="@/assets/images/xtu_logo.png" alt="湘潭大学"></a>
+      <router-link to="/home"><img class="xtu-logo" src="@/assets/images/xtu_logo.png" alt="湘潭大学"></router-link>
       <search-box></search-box>
       <div class="socialnet-link">
         <a href="#" class="link-item"><i class="iconfont icon-weibo"></i></a>

@@ -8,7 +8,7 @@ import FaxContent from '@/base/content/content'
 export default {
   data() {
     return {
-      newsId: this.$route.params.newsId
+      newsId: +this.$route.params.newsId
     }
   },
   components: {
