@@ -11,7 +11,7 @@
         <img :title="figureInfo.title" :src="figureInfo.pic" :alt="figureInfo.title">
       </router-link>
       <div class="figure-info">
-        <router-link :to="`news/view/${figureInfo.news_id}`" :title="figureInfo.title">
+        <router-link :to="`news/view/${figureInfo.news_id}`" :title="figureInfo.title" class="figure-title">
           {{ figureInfo.title }}
         </router-link>
         <p :title="figureInfo.description" class="figure-desc">{{ figureInfo.description }}</p>
@@ -23,7 +23,8 @@
         <li class="list-item" v-for="item in listData" :key="item.news_id || item.id">
           <div class="item-wrapper">
             <a v-if="item.linkUrl" :href="item.linkUrl" :title="item.title">{{ item.title }}</a>
-            <router-link v-else :to="`news/view/${item.news_id}`" :title="item.title">{{ item.title }}</router-link>
+            <router-link v-else :to="`/${item.type}/view/${item.news_id}`" :title="item.title">{{ item.title }}
+            </router-link>
             <span v-if="item.mtime">{{ item.mtime.split(' ')[0].split('-').slice(1, 3).join('-') }}</span>
           </div>
         </li>
@@ -103,27 +104,30 @@ export default {
     limit: {
       type: Number,
       default: 10
+    },
+    currPage: {
+      type: Number,
+      default: 3
     }
   },
   data() {
     return {
-      currentPage: this.currPage || 1
+      currentPage: null
     }
   },
   mounted() {
     this._initInfoPart()
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.currentPage = this.currPage
+      }, 0)
+    })
   },
   methods: {
     _initInfoPart() {
-      this.$refs.partTitle.style['border-bottom'] = `3px solid ${
-        this.borderColor
-      }`
-      this.$refs.partTitle.style['color'] = `${
-        this.titleColor
-      }`
-      this.$refs.partTitle.style['font-weight'] = `${
-        this.boldTitle ? 'bold' : 'normal'
-      }`
+      this.$refs.partTitle.style['border-bottom'] = `3px solid ${this.borderColor}`
+      this.$refs.partTitle.style['color'] = `${this.titleColor}`
+      this.$refs.partTitle.style['font-weight'] = `${this.boldTitle ? 'bold' : 'normal'}`
     },
     changePage(val) {
       this.$emit('pageChanged', val)
@@ -169,7 +173,8 @@ export default {
       display: inline-block;
       width: 190px;
       height: 115px;
-      background-color: #444444;
+      /*background-color: #444444;*/
+      @include default-background();
     }
 
     .figure-info {
@@ -184,7 +189,7 @@ export default {
         font-size: $font-size-title;
         font-weight: bold;
         transition: all .25s;
-        @include no-wrap(1);
+        @include no-wrap(2);
 
         &:hover {
           color: $color-red;

@@ -4,7 +4,8 @@
       <div slot="header">
         <span class="contribute-title">在线投稿</span>
       </div>
-      <el-form :model="contributeFrom" :rules="contributeRules" label-position="right" label-width="100px" ref="contributeFrom">
+      <el-form :model="contributeFrom" :rules="contributeRules" label-position="right" label-width="100px"
+               ref="contributeFrom">
         <el-form-item label="稿件标题" prop="title">
           <el-input v-model="contributeFrom.title" placeholder="请输入稿件标题"></el-input>
         </el-form-item>
@@ -22,7 +23,11 @@
         </el-form-item>
 
         <el-form-item label="新闻稿文件" prop="upload">
-          <el-upload action="/contribute" :auto-upload="false" :limit="1">
+          <el-upload
+            action="/contribute"
+            :auto-upload="false"
+            :limit="1"
+            :on-change="handleFileChange">
             <el-button size="medium" type="primary">点击上传</el-button>
           </el-upload>
           <div class="upload-tip">新闻稿件文件类型为 Word 或 JPG 文件；若新闻稿件有多个文件（含图片），请先使用压缩软件打包成一个 ZIP 或 RAR 文件再上传</div>
@@ -43,6 +48,8 @@
 </template>
 
 <script>
+import { PostContribute } from '@/api'
+
 export default {
   data() {
     return {
@@ -55,13 +62,13 @@ export default {
       },
       contributeRules: {
         title: [
-          { required: true, message: '请填写稿件标题', trigger: ['blur', 'change'] }
+          {required: true, message: '请填写稿件标题', trigger: ['blur', 'change']}
         ],
         author: [
-          { required: true, message: '请填写作者姓名', trigger: ['blur', 'change'] }
+          {required: true, message: '请填写作者姓名', trigger: ['blur', 'change']}
         ],
         tel: [
-          { required: true, message: '请填写联系方式', trigger: ['blur', 'change'] }
+          {required: true, message: '请填写联系方式', trigger: ['blur', 'change']}
         ]
       }
     }
@@ -71,11 +78,18 @@ export default {
       this.$refs.contributeFrom.validate((valid) => {
         if (valid) {
           alert('submit!')
+          console.log(this.files)
+          const form = this.contributeFrom
+          PostContribute(form.title, form.author, form.tel, form.organization, form.remark, this.file)
         } else {
           console.log('error submit!!')
           return false
         }
       })
+    },
+    handleFileChange(file, fileList) {
+      this.file = fileList.length ? fileList[0] : null
+      console.log(file, fileList)
     },
     resetForm() {
       this.$refs.contributeFrom.resetFields()

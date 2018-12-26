@@ -17,7 +17,7 @@
           <p class="item-date">
             <i class="iconfont icon-riliriqi"></i>{{ item.mtime }}<i class="iconfont icon-tubiao_liulan"></i>{{ item.view_count }}
           </p>
-          <router-link :title="item.title" :to="item.news_id">{{ item.title }}</router-link>
+          <router-link :title="item.title" :to="`/${item.type}/view/${item.news_id}`">{{ item.title }}</router-link>
         </li>
       </ul>
     </div>

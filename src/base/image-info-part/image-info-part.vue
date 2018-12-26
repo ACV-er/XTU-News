@@ -95,11 +95,16 @@ export default {
   },
   data() {
     return {
-      currentPage: this.currPage || 1
+      currentPage: null
     }
   },
   mounted() {
     this._initInfoPart()
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.currentPage = this.currPage
+      }, 0)
+    })
   },
   methods: {
     _initInfoPart() {
@@ -180,7 +185,7 @@ export default {
             justify-content: space-between;
 
             p {
-              margin: 10px 0;
+              margin: 0 0 10px;
               line-height: 1.4em;
               font-size: $font-size-medium;
               @include no-wrap(6);

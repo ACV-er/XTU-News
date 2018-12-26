@@ -2,25 +2,23 @@
   <div class="slider-container" v-if="infoData">
     <div class="slider" ref="slider">
       <div class="slider-group" ref="sliderGroup">
-        <div class="slider-item" v-for="item in infoData" :key="item.news_id">
-          <router-link :to="`news/view/${item.news_id}`">
+        <div class="slider-item" v-for="item in infoData" :key="item.origin_news_id || item.news_id">
+          <router-link :to="`news/view/${item.origin_news_id || item.news_id}`">
             <img :src="item.pic">
           </router-link>
 
           <div class="slider-content">
-            <router-link :to="`news/view/${item.news_id}`" :title="item.title" class="slider-title">{{ item.title }}</router-link>
+            <router-link :to="`news/view/${item.origin_news_id || item.news_id}`" :title="item.title" class="slider-title">{{ item.title }}</router-link>
             <p :title="item.description" class="slider-desc">{{ item.description }}</p>
           </div>
         </div>
       </div>
     </div>
-
     <ul class="date-list" @click.stop>
-      <li class="date-item" v-for="(item, index) in infoData" :key="item.news_id" :class="{ 'active': currIndex === index }" @click="moveToPage(index)">
+      <li class="date-item" v-for="(item, index) in infoData" :key="item.origin_news_id || item.news_id" :class="{ 'active': currIndex === index }" @click="moveToPage(index)">
         <p class="date-day">{{ item.mtime.split(' ')[0].split('-')[2] }}</p>
         <span class="date-time">{{ item.mtime.split(' ')[0].split('-').slice(0, 2).join('.') }}</span>
       </li>
-
       <div class="op-btn">
         <div @click="moveToPrev" class="prev-btn">
           <i class="iconfont icon-arrow-left"></i>
@@ -51,7 +49,6 @@ export default {
   },
   watch: {
     infoData(newValue) {
-      console.log(newValue)
       if (newValue) {
         this.$nextTick(() => {
           this._initSlider()

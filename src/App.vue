@@ -32,6 +32,7 @@ export default {
 }
 
 #app {
+  min-width: $content-width;
   background: #f7f8f8;
 }
 

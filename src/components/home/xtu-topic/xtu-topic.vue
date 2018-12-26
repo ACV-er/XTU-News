@@ -17,17 +17,26 @@
         </transition>
       </div>
 
-      <info-part class="lastest-topic"
-                 title="最新专题"
-                 border-color="transparent"
-                 more-url="https://baidu.com/"
-                 title-color="#fff">
-        <div slot="custom" class="topic-list">
+      <!--<info-part class="lastest-topic"-->
+      <!--title="最新专题"-->
+      <!--border-color="transparent"-->
+      <!--more-url="https://baidu.com/"-->
+      <!--title-color="#fff">-->
+      <div class="lastest-topic">
+        <p class="part-title">
+          最新专题
+          <!--<a v-if="!noMore" :href="moreUrl" title="查看更多" class="part-more">-->
+          <!--<i class="iconfont icon-icongengduo"></i>-->
+          <!--</a>-->
+        </p>
+        <!--<div slot="custom" class="topic-list">-->
+        <div class="topic-list">
           <a class="topic-item" :href="item.linkUrl" v-for="item in topicInfo" :key="item.title" :title="item.title">
             <img :src="item.picUrl" :alt="item.title">
           </a>
         </div>
-      </info-part>
+      </div>
+      <!--</info-part>-->
     </div>
   </div>
 </template>
@@ -148,6 +157,13 @@ export default {
 
     .lastest-topic {
       width: 310px;
+
+      .part-title {
+        font-size: 26px;
+        margin: 0;
+        line-height: 67px;
+        color: #fff;
+      }
 
       .topic-list {
         .topic-item {

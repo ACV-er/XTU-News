@@ -2,13 +2,15 @@
   <div class="video-content">
     <div class="video-list-wrapper" id="video-list-wrapper">
       <div class="video-list" v-loading="videoLoading" element-loading-background="rgba(247, 248, 248, 0.9)">
-        <video-item v-for="(item, index) in videoInfoList" :key="item.title" :video-info="item" :width="index ? 300 : 650" :title-size="index ? 14 : 24" :divider="!index"></video-item>
+        <video-item v-for="(item, index) in videoInfoList" :key="item.title" :video-info="item"
+                    :width="index ? 300 : 650" :title-size="index ? 14 : 24" :divider="!index"></video-item>
+        <div class="video-list-none" v-if="!videoInfoList || videoInfoList.length === 0">暂无数据</div>
       </div>
 
       <el-pagination
         class="page-control"
         @current-change="changePage"
-        :current-page.sync="currPage"
+        :current-page.sync="currentPage"
         :page-size="limit"
         layout="prev, pager, next, jumper"
         background
@@ -22,16 +24,24 @@
 <script>
 import VideoItem from './video-item'
 import HotSpots from '@/base/hot-spots/hot-spots'
-import { getVideoByPage, handleError } from '@/api'
-import { scroller } from 'vue-scrollto/src/scrollTo'
+import {getVideoByPage, handleError} from '@/api'
+import {scroller} from 'vue-scrollto/src/scrollTo'
+import {get} from 'lodash'
 
 export default {
   mounted() {
-    this._getVideoList()
+    this.$nextTick(() => {
+      this._getVideoList()
+      setTimeout(() => {
+        this.currentPage = this.currPage
+      }, 0)
+    })
   },
   data() {
+    console.log(this.$route.params.page)
     return {
       currPage: parseInt(this.$route.params.page) || 1,
+      currentPage: null,
       videoInfoList: [],
       videoLoading: false,
       total: 0,
@@ -45,9 +55,9 @@ export default {
     },
     async _getVideoList() {
       this.videoLoading = true
-      let data = (await getVideoByPage(this.currPage)).data
+      let data = (await getVideoByPage(this.currPage, this.limit)).data
       if (data.code === 0) {
-        this.total = data.data ? +data.data.count : 0
+        this.total = +get(data, 'data.count', 0)
         this.videoInfoList = data.data.list ? data.data.list.map(item => {
           return {
             title: item.title,
@@ -98,6 +108,13 @@ export default {
       flex-wrap: wrap;
       justify-content: space-between;
       min-height: 150px;
+
+      .video-list-none {
+        width: 100%;
+        line-height: 150px;
+        text-align: center;
+        color: #666;
+      }
     }
 
     .page-control {

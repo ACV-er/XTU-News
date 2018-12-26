@@ -216,11 +216,11 @@ export const cultureMenu = [
 // 湘大印记目录
 export const markMenu = [
   {
-    title: '湘大史话',
-    link: '/mark/history'
-  },
-  {
     title: '湘大人物',
     link: '/mark/character'
+  },
+  {
+    title: '湘大史话',
+    link: '/mark/history'
   }
 ]

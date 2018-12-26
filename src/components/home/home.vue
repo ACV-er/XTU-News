@@ -1,5 +1,5 @@
 <template>
-  <div class="home-content">
+  <div class="home-content" v-loading.lock.fullscreen.body="loading">
     <xtu-media :info-data="mediaInfo"/>
     <xtu-news :info-data="newsInfo"/>
     <xtu-communication :info-data="communicationInfo"/>
@@ -19,7 +19,7 @@ import { getHomeInfo, handleError } from '@/api'
 export default {
   data() {
     return {
-      loading: false,
+      loading: true,
       info: null
     }
   },
@@ -69,15 +69,14 @@ export default {
   },
   methods: {
     async _getHomeInfo() {
-      this.loading = false
+      this.loading = true
       let data = (await getHomeInfo()).data
       if (data.code === 0) {
         this.info = data.data
-        console.log(this.info)
       } else {
         handleError(data)
       }
-      this.loading = true
+      this.loading = false
     }
   },
   components: {

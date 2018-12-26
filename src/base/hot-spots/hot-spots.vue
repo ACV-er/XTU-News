@@ -24,14 +24,7 @@ export default {
       this.loading = true
       const data = (await getHotSpots()).data
       if (data.code === 0) {
-        this.hotSpotsInfo = data.data.list.map(item => {
-          return {
-            date: item.mtime,
-            title: item.title,
-            view: item.view_count || 0,
-            linkUrl: `/news/view/${item.news_id}`
-          }
-        })
+        this.hotSpotsInfo = data.data.list
         // {
         //   date: '2018.02.06',
         //     title: '【湖南教育电视台】湘大信用法治平台建设协作会长沙举行',
