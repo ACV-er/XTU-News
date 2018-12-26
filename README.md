@@ -1,4 +1,4 @@
-# xtu-news
+# xtu-news [![Build Status](https://travis-ci.org/LBinin/XTU-News.png?branch=master)](https://travis-ci.org/LBinin/XTU-News)
 
 > 湘大新闻网
 

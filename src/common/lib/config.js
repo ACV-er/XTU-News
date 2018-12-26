@@ -142,23 +142,23 @@ export const introductionMenu = [
     moreLink: '#',
     contents: [
       {
-        title: '宣传画册',
+        title: '关于组织 2019 年下半年及部分上半年赴任汉语教师志愿者报名的通知',
         link: '#'
       },
       {
-        title: '宣传视频',
+        title: '关于报送 2019 年教学科研人员出国开展学术交流合作年度计划的通知',
         link: '#'
       },
       {
-        title: '湘大校歌',
+        title: '2019 年国家公派高级研究学者、访问学者、博士后项目选派办法',
         link: '#'
       },
       {
-        title: '电子橱窗',
+        title: '关于做好 2019 年上半年全国计算机等级考试',
         link: '#'
       },
       {
-        title: '湘大图片',
+        title: '关于集中办理数字电视收视费缴费的公告',
         link: '#'
       }
     ]
@@ -170,19 +170,19 @@ export const introductionMenu = [
     moreLink: '#',
     contents: [
       {
-        title: '部领导',
+        title: '下载文件1',
         link: '#'
       },
       {
-        title: '办公室',
+        title: '下载文件2',
         link: '#'
       },
       {
-        title: '《湘潭大学报》编辑部',
+        title: '下载文件3',
         link: '#'
       },
       {
-        title: '湘潭大学广播电视台',
+        title: '下载文件4',
         link: '#'
       }
     ]
