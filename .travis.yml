@@ -2,10 +2,11 @@ language: node_js
 node_js:
 - '10'
 before_install:
-- openssl aes-256-cbc -K $encrypted_a2c824ace89e_key -iv $encrypted_a2c824ace89e_iv
-  -in id_rsa_blog.enc -out ~/.ssh/id_rsa_blog -d
-- chmod 600 ~/.ssh/id_rsa_blog
-- echo -e "Host lbinin.com\n\tStrictHostKeyChecking no\n\tIdentityFile ~/.ssh/id_rsa_blog" >> ~/.ssh/config
+- openssl aes-256-cbc -K $encrypted_9230c333744e_key -iv $encrypted_9230c333744e_iv
+  -in id_rsa_xtu_news.enc -out ~/.ssh/id_rsa_xtu_news -d
+- chmod 600 ~/.ssh/id_rsa_xtu_news
+- echo -e "Host lbinin.com\n\tStrictHostKeyChecking no\n\tIdentityFile ~/.ssh/id_rsa_xtu_news"
+  >> ~/.ssh/config
 addons:
   ssh_known_hosts: lbinin.com
 install:
