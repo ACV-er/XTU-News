@@ -19,3 +19,155 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## api definition
+
+### 首页
+
+url: `/home.php`
+
+method: 'GET'
+
+params:  
+
+return:
+
+```json5
+{
+    "code": 0,
+    "data": {
+        "list": {
+            // mediaInfo
+            "shouyejiaodiantu": [ // sliderList
+                {
+                    // ${item.origin_news_id || item.news_id}
+                    "origin_news_id": 0,
+                    "news_id": 0,
+                    // item.pic
+                    "pic": "",
+                    // item.title
+                    "title": "",
+                    // item.description
+                    "description": "",
+                    // item.mtime.split(' ')[0].split('-')[2]
+                    // type(date) or type(datetime)
+                    "mtime": "2019-01-01",
+                }
+            ],
+            "meitixiangda": [ // mediaList
+                {
+                    // item.news_id
+                    "news_id": 0,
+                    // item.mtime
+                    "mtime": "2019-01-01 00:00:00",
+                    // item.view_count
+                    // 浏览量
+                    "view_count": 1,
+                    // ${item.type}
+                    // data image type
+                    "type": "xxx",
+                    // item.title
+                    "title": ""
+                }
+            ],
+            // newsInfo
+            "zonghexinwen": [ // newsList
+                // id0 为 figure
+                {
+                    // <router-link :to="`news/view/${figureInfo.news_id}`">
+                    "news_id": 0,
+                    "title": "",
+                    "pic": "",
+                    "description": "",
+                    "linkUrl": "",
+                    // router-link v-else :to="`/${item.type}/view/${item.news_id}`" :title="item.title">{{ item.title }}
+                    "type": "",
+                    "mtime": "",
+                }
+            ],
+            "jinqiredian": [ // hotSpotsList
+                {
+                    // <router-link :to="`news/view/${figureInfo.news_id}`">
+                    "news_id": 0,
+                    "title": "",
+                    "pic": "",
+                    "description": "",
+                    "linkUrl": "",
+                    // router-link v-else :to="`/${item.type}/view/${item.news_id}`" :title="item.title">{{ item.title }}
+                    "type": "",
+                    "mtime": "",
+                }
+            ],
+            // communicationInfo
+            "yuanxichuanzhen": [ // faxList
+                {
+                    // <router-link :to="`news/view/${figureInfo.news_id}`">
+                    "news_id": 0,
+                    "title": "",
+                    "pic": "",
+                    "description": "",
+                    "linkUrl": "",
+                    // router-link v-else :to="`/${item.type}/view/${item.news_id}`" :title="item.title">{{ item.title }}
+                    "type": "",
+                    "mtime": "",
+                }
+            ],
+            "xiangdaxiaobao": [ // paperList
+                {
+                    // <router-link :to="`news/view/${figureInfo.news_id}`">
+                    "news_id": 0,
+                    "title": "",
+                    "pic": "",
+                    "description": "",
+                    "linkUrl": "",
+                    // router-link v-else :to="`/${item.type}/view/${item.news_id}`" :title="item.title">{{ item.title }}
+                    "type": "",
+                    "mtime": "",
+                }
+            ],
+            // markInfo
+            "xiangdayinji": [ // markList
+                {
+                    // <router-link :to="`news/view/${figureInfo.news_id}`">
+                    "news_id": 0,
+                    "title": "",
+                    "pic": "",
+                    "description": "",
+                    "linkUrl": "",
+                    // router-link v-else :to="`/${item.type}/view/${item.news_id}`" :title="item.title">{{ item.title }}
+                    "type": "",
+                    "mtime": "",
+                }
+            ]
+        }
+    }
+}
+```
+
+### 新闻列表
+
+url: `/newslist.php`
+
+method: 'GET'
+
+params:  
+
+param | location | type | example
+-|-|-|-
+letter|query|string|zonghexinwen
+page|query|number|1
+limit|query|number|10
+
+return:
+
+```markdown
+### xx
+
+url: `/`
+
+method: 'GET'
+
+params:  
+
+return:
+```
