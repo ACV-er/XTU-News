@@ -369,7 +369,7 @@ params:
 
 param | location | type | example
 -|-|-|-
-limit|query|number|10
+limit|query|number|5
 
 return:
 
@@ -431,4 +431,12 @@ param | location | type | example
 
 return:
 
+```
+
+## 使用mock
+
+在 `src/api/index.js` 中添加：
+
+```js
+import '../mocks/api'
 ```
