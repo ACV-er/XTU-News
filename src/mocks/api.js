@@ -13,9 +13,9 @@ Mock.mock(`${URL_BASE}/home.php`, {
           'origin_news_id|+1': 0,
           'news_id|+1': 0,
           // item.pic
-          'pic': '',
+          'pic': '@image',
           // item.title
-          'title': '@cword(5,10)',
+          'title': '@ctitle(5,10)',
           // item.description
           'description': '@csentence(10, 30)',
           // item.mtime.split(' ')[0].split('-')[2]
@@ -36,7 +36,7 @@ Mock.mock(`${URL_BASE}/home.php`, {
           // data image type
           'type': 'xxx',
           // item.title
-          'title': '@cword(5,10)'
+          'title': '@ctitle(5,10)'
         }
       ],
       // newsInfo
@@ -45,8 +45,8 @@ Mock.mock(`${URL_BASE}/home.php`, {
         {
           // <router-link :to="`news/view/${figureInfo.news_id}`">
           'news_id|+1': 0,
-          'title': '@cword(5,10)',
-          'pic': '',
+          'title': '@ctitle(5,10)',
+          'pic': '@image',
           'description': '@csentence(10, 30)',
           'linkUrl': '',
           // router-link v-else :to="`/${item.type}/view/${item.news_id}`" :title="item.title">{{ item.title }}
@@ -58,8 +58,8 @@ Mock.mock(`${URL_BASE}/home.php`, {
         {
           // <router-link :to="`news/view/${figureInfo.news_id}`">
           'news_id|+1': 0,
-          'title': '@cword(5,10)',
-          'pic': '',
+          'title': '@ctitle(5,10)',
+          'pic': '@image',
           'description': '@csentence(10, 30)',
           'linkUrl': '',
           // router-link v-else :to="`/${item.type}/view/${item.news_id}`" :title="item.title">{{ item.title }}
@@ -72,8 +72,8 @@ Mock.mock(`${URL_BASE}/home.php`, {
         {
           // <router-link :to="`news/view/${figureInfo.news_id}`">
           'news_id|+1': 0,
-          'title': '@cword(5,10)',
-          'pic': '',
+          'title': '@ctitle(5,10)',
+          'pic': '@image',
           'description': '@csentence(10, 30)',
           'linkUrl': '',
           // router-link v-else :to="`/${item.type}/view/${item.news_id}`" :title="item.title">{{ item.title }}
@@ -85,8 +85,8 @@ Mock.mock(`${URL_BASE}/home.php`, {
         {
           // <router-link :to="`news/view/${figureInfo.news_id}`">
           'news_id|+1': 0,
-          'title': '@cword(5,10)',
-          'pic': '',
+          'title': '@ctitle(5,10)',
+          'pic': '@image',
           'description': '@csentence(10, 30)',
           'linkUrl': '',
           // router-link v-else :to="`/${item.type}/view/${item.news_id}`" :title="item.title">{{ item.title }}
@@ -99,8 +99,8 @@ Mock.mock(`${URL_BASE}/home.php`, {
         {
           // <router-link :to="`news/view/${figureInfo.news_id}`">
           'news_id|+1': 0,
-          'title': '@cword(5,10)',
-          'pic': '',
+          'title': '@ctitle(5,10)',
+          'pic': '@image',
           'description': '@csentence(10, 30)',
           'linkUrl': '',
           // router-link v-else :to="`/${item.type}/view/${item.news_id}`" :title="item.title">{{ item.title }}
@@ -109,5 +109,149 @@ Mock.mock(`${URL_BASE}/home.php`, {
         }
       ]
     }
+  }
+})
+
+// let newsList = Mock.mock({
+//   'list|10': [
+//     {
+//       'news_id|+1': 0,
+//       // item.pic
+//       'pic': '@image',
+//       // item.title
+//       'title': '@ctitle',
+//       // item.description
+//       'description': '@csentence(10, 30)',
+//       // type(date) or type(datetime)
+//       'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
+//       'view_count': 0
+//     }
+//   ]
+// })
+
+// Mock.mock(`${URL_BASE}/newslist.php`, function(options) {
+//   const params = options.body
+//   const letter = params.letter
+//   const page = params.page
+//   const limit = params.limit
+// })
+
+Mock.mock(`${URL_BASE}/newslist.php?letter=zonghexinwen&page=1&limit=10`, {
+  'code': 0,
+  'data': {
+    'list|10': [
+      {
+        'news_id|+1': 0,
+        // item.pic
+        'pic': '@image',
+        // item.title
+        'title': '@ctitle',
+        // item.description
+        'description': '@csentence(10, 30)',
+        // type(date) or type(datetime)
+        'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
+        'view_count': 0
+      }
+    ]
+  }
+})
+
+Mock.mock(`${URL_BASE}/newslist.php?letter=meitixiangda&page=1&limit=10`, {
+  'code': 0,
+  'data': {
+    'list|10': [
+      {
+        'news_id|+1': 0,
+        // item.pic
+        'pic': '@image',
+        // item.title
+        'title': '@ctitle',
+        // item.description
+        'description': '@csentence(10, 30)',
+        // type(date) or type(datetime)
+        'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
+        'view_count': 0
+      }
+    ]
+  }
+})
+
+Mock.mock(`${URL_BASE}/newslist.php?letter=yuanxichuanzhen&page=1&limit=10`, {
+  'code': 0,
+  'data': {
+    'list|10': [
+      {
+        'news_id|+1': 0,
+        // item.pic
+        'pic': '@image',
+        // item.title
+        'title': '@ctitle',
+        // item.description
+        'description': '@csentence(10, 30)',
+        // type(date) or type(datetime)
+        'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
+        'view_count': 0
+      }
+    ]
+  }
+})
+
+Mock.mock(`${URL_BASE}/newslist.php?letter=shipinxinwen&page=1&limit=10`, {
+  'code': 0,
+  'data': {
+    'list|10': [
+      {
+        'news_id|+1': 0,
+        // item.pic
+        'pic': '@image',
+        // item.title
+        'title': '@ctitle',
+        // item.description
+        'description': '@csentence(10, 30)',
+        // type(date) or type(datetime)
+        'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
+        'view_count': 0
+      }
+    ]
+  }
+})
+
+Mock.mock(`${URL_BASE}/newslist.php?letter=xiangdarenwu&page=1&limit=10`, {
+  'code': 0,
+  'data': {
+    'list|10': [
+      {
+        'news_id|+1': 0,
+        // item.pic
+        'pic': '@image',
+        // item.title
+        'title': '@cname',
+        // item.description
+        'description': '@csentence(10, 30)',
+        // type(date) or type(datetime)
+        'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
+        'view_count': 0
+      }
+    ]
+  }
+})
+
+Mock.mock(`${URL_BASE}/hotlist.php?limit=5`, {
+  'code': 0,
+  'data': {
+    'list|10': [
+      {
+        'news_id|+1': 0,
+        // item.pic
+        'pic': '@image',
+        // item.title
+        'title': '@ctitle',
+        // item.description
+        'description': '@csentence(10, 30)',
+        // type(date) or type(datetime)
+        'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
+        'view_count': 0
+      }
+    ]
   }
 })
