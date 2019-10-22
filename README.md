@@ -26,7 +26,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 url: `/home.php`
 
-method: 'GET'
+method: `GET`
 
 params:  
 
@@ -144,30 +144,291 @@ return:
 }
 ```
 
-### 新闻列表
+### 综合新闻列表
 
-url: `/newslist.php`
+url: `/newslist.php?letter=zonghexinwen`
 
-method: 'GET'
+method: `GET`
 
 params:  
 
 param | location | type | example
 -|-|-|-
-letter|query|string|zonghexinwen
 page|query|number|1
 limit|query|number|10
 
 return:
+
+```json5
+{
+    "code": 0,
+    "count": 1,
+    "data": {
+        "list": [
+            {
+                "news_id": 0,
+                // item.pic
+                "pic": "",
+                // item.title
+                "title": "",
+                // item.description
+                "description": "",
+                // type(date) or type(datetime)
+                "mtime": "2019-01-01 00:00:00",
+                "view_count": 0
+            }
+        ],
+    }
+}
+```
+
+### 新闻页面
+
+url: `/news.php`
+
+method: `GET`
+
+params:
+
+param | location | type | example
+-|-|-|-
+news_id|query|number|1
+
+return:
+
+```json5
+{
+    "code": 0,
+    "data": {
+        "title": "标题",
+        "mtime": "2019-01-01 00:00:00",
+        "content": "内容"
+    }
+}
+```
+
+### 媒体湘大列表
+
+url: `/newslist.php?letter=meitixiangda`
+
+method: `GET`
+
+params:
+
+param | location | type | example
+-|-|-|-
+page|query|number|1
+limit|query|number|10
+
+return:
+
+```json5
+{
+    "code": 0,
+    "count": 1,
+    "data": {
+        "list": [
+            {
+                "news_id": 0,
+                // item.pic
+                "pic": "",
+                // item.title
+                "title": "",
+                // item.description
+                "description": "",
+                // type(date) or type(datetime)
+                "mtime": "2019-01-01 00:00:00",
+                "view_count": 0
+            }
+        ],
+    }
+}
+```
+
+### 院系传真列表
+
+url: `/newslist.php?letter=yuanxichuanzhen`
+
+method: `GET`
+
+params:
+
+param | location | type | example
+-|-|-|-
+page|query|number|1
+limit|query|number|10
+
+return:
+
+```json5
+{
+    "code": 0,
+    "count": 1,
+    "data": {
+        "list": [
+            {
+                "news_id": 0,
+                // item.pic
+                "pic": "",
+                // item.title
+                "title": "",
+                // item.description
+                "description": "",
+                // type(date) or type(datetime)
+                "mtime": "2019-01-01 00:00:00",
+                "view_count": 0
+            }
+        ],
+    }
+}
+```
+
+### 视频新闻列表
+
+url: `/newslist.php?letter=shipinxinwen`
+
+method: `GET`
+
+params:
+
+param | location | type | example
+-|-|-|-
+page|query|number|1
+limit|query|number|10
+
+return:
+
+```json5
+{
+    "code": 0,
+    "count": 1,
+    "data": {
+        "list": [
+            {
+                "news_id": 0,
+                // item.pic
+                "pic": "",
+                // item.title
+                "title": "",
+                // item.description
+                "description": "",
+                // type(date) or type(datetime)
+                "mtime": "2019-01-01 00:00:00",
+                "view_count": 0
+            }
+        ],
+    }
+}
+```
+
+### 湘大人物列表
+
+url: `/newslist.php?letter=xiangdarenwu`
+
+method: `GET`
+
+params:
+
+param | location | type | example
+-|-|-|-
+page|query|number|1
+limit|query|number|10
+
+return:
+
+```json5
+{
+    "code": 0,
+    "count": 1,
+    "data": {
+        "list": [
+            {
+                "news_id": 0,
+                // item.pic
+                "pic": "",
+                // item.title
+                "title": "",
+                // item.description
+                "description": "",
+                // type(date) or type(datetime)
+                "mtime": "2019-01-01 00:00:00",
+                "view_count": 0
+            }
+        ],
+    }
+}
+```
+
+### 近期热点列表
+
+url: `/hotlist.php`
+
+method: `GET`
+
+params:
+
+param | location | type | example
+-|-|-|-
+limit|query|number|10
+
+return:
+
+```json5
+{
+    "code": 0,
+    "count": 1,
+    "data": {
+        "list": [
+            {
+                "news_id": 0,
+                // item.title
+                "title": "",
+                // router-link :title="item.title" :to="`/${item.type}/view/${item.news_id}`
+                "type": "",
+                // type(date) or type(datetime)
+                "mtime": "2019-01-01 00:00:00",
+                "view_count": 0
+            }
+        ],
+    }
+}
+```
+
+### 发表
+
+url: `/addContent.php`
+
+method: `POST`
+
+params:
+
+```json5
+{
+    "title": "标题",
+    "author": "作者",
+    "tel": "电话",
+    "belongs": "组织",
+    "mark": "备注",
+    "file": "文件"
+}
+```
+
+return:
+
+### API template
 
 ```markdown
 ### xx
 
 url: `/`
 
-method: 'GET'
+method: `GET`
 
-params:  
+params:
+
+param | location | type | example
+-|-|-|-
 
 return:
+
 ```
