@@ -112,22 +112,25 @@ Mock.mock(`${URL_BASE}/home.php`, {
   }
 })
 
-// let newsList = Mock.mock({
-//   'list|10': [
-//     {
-//       'news_id|+1': 0,
-//       // item.pic
-//       'pic': '@image',
-//       // item.title
-//       'title': '@ctitle',
-//       // item.description
-//       'description': '@csentence(10, 30)',
-//       // type(date) or type(datetime)
-//       'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
-//       'view_count': 0
-//     }
-//   ]
-// })
+let newsList = Mock.mock({
+  'code': 0,
+  'data': {
+    'list|10': [
+      {
+        'news_id|+1': 0,
+        // item.pic
+        'pic': '@image("320x160")',
+        // item.title
+        'title': '@ctitle',
+        // item.description
+        'description': '@csentence(10, 30)',
+        // type(date) or type(datetime)
+        'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
+        'view_count': 0
+      }
+    ]
+  }
+})
 
 // Mock.mock(`${URL_BASE}/newslist.php`, function(options) {
 //   const params = options.body
@@ -136,85 +139,13 @@ Mock.mock(`${URL_BASE}/home.php`, {
 //   const limit = params.limit
 // })
 
-Mock.mock(`${URL_BASE}/newslist.php?letter=zonghexinwen&page=1&limit=10`, {
-  'code': 0,
-  'data': {
-    'list|10': [
-      {
-        'news_id|+1': 0,
-        // item.pic
-        'pic': '@image',
-        // item.title
-        'title': '@ctitle',
-        // item.description
-        'description': '@csentence(10, 30)',
-        // type(date) or type(datetime)
-        'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
-        'view_count': 0
-      }
-    ]
-  }
-})
+Mock.mock(`${URL_BASE}/newslist.php?letter=zonghexinwen&page=1&limit=10`, newsList)
 
-Mock.mock(`${URL_BASE}/newslist.php?letter=meitixiangda&page=1&limit=10`, {
-  'code': 0,
-  'data': {
-    'list|10': [
-      {
-        'news_id|+1': 0,
-        // item.pic
-        'pic': '@image',
-        // item.title
-        'title': '@ctitle',
-        // item.description
-        'description': '@csentence(10, 30)',
-        // type(date) or type(datetime)
-        'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
-        'view_count': 0
-      }
-    ]
-  }
-})
+Mock.mock(`${URL_BASE}/newslist.php?letter=meitixiangda&page=1&limit=10`, newsList)
 
-Mock.mock(`${URL_BASE}/newslist.php?letter=yuanxichuanzhen&page=1&limit=10`, {
-  'code': 0,
-  'data': {
-    'list|10': [
-      {
-        'news_id|+1': 0,
-        // item.pic
-        'pic': '@image',
-        // item.title
-        'title': '@ctitle',
-        // item.description
-        'description': '@csentence(10, 30)',
-        // type(date) or type(datetime)
-        'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
-        'view_count': 0
-      }
-    ]
-  }
-})
+Mock.mock(`${URL_BASE}/newslist.php?letter=yuanxichuanzhen&page=1&limit=10`, newsList)
 
-Mock.mock(`${URL_BASE}/newslist.php?letter=shipinxinwen&page=1&limit=10`, {
-  'code': 0,
-  'data': {
-    'list|10': [
-      {
-        'news_id|+1': 0,
-        // item.pic
-        'pic': '@image',
-        // item.title
-        'title': '@ctitle',
-        // item.description
-        'description': '@csentence(10, 30)',
-        // type(date) or type(datetime)
-        'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
-        'view_count': 0
-      }
-    ]
-  }
-})
+Mock.mock(`${URL_BASE}/newslist.php?letter=shipinxinwen&page=1&limit=10`, newsList)
 
 Mock.mock(`${URL_BASE}/newslist.php?letter=xiangdarenwu&page=1&limit=10`, {
   'code': 0,
@@ -253,5 +184,22 @@ Mock.mock(`${URL_BASE}/hotlist.php?limit=5`, {
         'view_count': 0
       }
     ]
+  }
+})
+
+Mock.mock(/\/news.php\?news_id=([0-9]*)/, {
+  'code': 0,
+  'data': {
+    'news_id': 0,
+    // item.pic
+    // 'pic': '@image()',
+    // item.title
+    'title': '@ctitle',
+    // item.description
+    'description': '@csentence(10, 30)',
+    'content': '@cparagraph(30, 40)',
+    // type(date) or type(datetime)
+    'mtime': '@datetime("yyyy-MM-dd hh:mm:ss")',
+    'view_count|1-100': 0
   }
 })
